@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Loan Prediction Result</h2>
+  <div class="result {% if result == 'Approved' %}approved{% else %}denied{% endif %}">
+    <h3>{{ result }}</h3>
+    <p>{{ message }}</p>
+  </div>
+
+  <h3>Application Details:</h3>
+  <ul>
+    {% for key, value in form_data.items %}
+      <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'predict' %}" class="btn btn-primary">Make Another Prediction</a>
+{% endblock %}
