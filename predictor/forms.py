@@ -26,12 +26,20 @@ class LoanPredictionForm(forms.Form):
         initial='',
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    ApplicantIncome = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    CoapplicantIncome = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    LoanAmount = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    Loan_Amount_Term = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    ApplicantIncome = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Applicant Income'})
+    )
+    CoapplicantIncome = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Coapplicant Income'})
+    )
+    LoanAmount = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Loan Amount'})
+    )
+    Loan_Amount_Term = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Loan Term in Months'})
+    )
     Credit_History = forms.ChoiceField(
-        choices=[('', 'Select Credit History'), (1, 'Yes'), (0, 'No')],
+        choices=[('', 'Select Credit History'), (1, 'Good'), (0, 'Bad')],
         initial='',
         widget=forms.Select(attrs={'class': 'form-control'})
     )

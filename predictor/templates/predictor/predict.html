@@ -1,18 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Loan Prediction</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="form-group">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.errors %}
-          <div class="error">{{ field.errors }}</div>
-        {% endif %}
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Predict</button>
-  </form>
+<div class="container">
+    <h1>Loan Prediction</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-section">
+            <h2>Personal Information</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.Gender.id_for_label }}">Gender:</label>
+                    {{ form.Gender }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.Married.id_for_label }}">Married:</label>
+                    {{ form.Married }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.Dependents.id_for_label }}">Dependents:</label>
+                    {{ form.Dependents }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.Education.id_for_label }}">Education:</label>
+                    {{ form.Education }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.Self_Employed.id_for_label }}">Self Employed:</label>
+                    {{ form.Self_Employed }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>Financial Information</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.ApplicantIncome.id_for_label }}">Applicant Income:</label>
+                    {{ form.ApplicantIncome }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.CoapplicantIncome.id_for_label }}">Coapplicant Income:</label>
+                    {{ form.CoapplicantIncome }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.LoanAmount.id_for_label }}">Loan Amount:</label>
+                    {{ form.LoanAmount }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.Loan_Amount_Term.id_for_label }}">Loan Amount Term:</label>
+                    {{ form.Loan_Amount_Term }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.Credit_History.id_for_label }}">Credit History:</label>
+                    {{ form.Credit_History }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.Property_Area.id_for_label }}">Property Area:</label>
+                    {{ form.Property_Area }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <button type="submit" class="btn-predict">Predict Loan</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
