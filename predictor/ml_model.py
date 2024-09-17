@@ -7,8 +7,11 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+import joblib
+from django.conf import settings
 
 model_path = os.path.join(settings.BASE_DIR, 'predictor', 'loan_predictor_model.joblib')
+model = joblib.load(model_path)
 
 try:
     loaded_model = joblib.load(model_path)
