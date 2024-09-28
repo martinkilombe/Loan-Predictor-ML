@@ -1,18 +1,168 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h2>Loan Prediction Result</h2>
-  <div class="result {% if result == 'Approved' %}approved{% else %}denied{% endif %}">
-    <h3>{{ result }}</h3>
-    <p>{{ message }}</p>
-  </div>
-
-  <h3>Application Details:</h3>
-  <ul>
-    {% for key, value in form_data.items %}
-      <li><strong>{{ key }}:</strong> {{ value }}</li>
-    {% endfor %}
-  </ul>
-
-  <a href="{% url 'predict' %}" class="btn btn-primary">Make Another Prediction</a>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction Result</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --approved-color: #4CAF50;
+            --denied-color: #F44336;
+            --bg-color: #f0f4f8;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --detail-bg: #e9ecef;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .result {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .result.approved {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 2px solid var(--approved-color);
+        }
+        .result.denied {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 2px solid var(--denied-color);
+        }
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .approved .result-icon {
+            color: var(--approved-color);
+        }
+        .denied .result-icon {
+            color: var(--denied-color);
+        }
+        .result h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .approved h2 {
+            color: var(--approved-color);
+        }
+        .denied h2 {
+            color: var(--denied-color);
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .details {
+            background-color: var(--detail-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .details h3 {
+            margin-top: 0;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .detail-item {
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .detail-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Prediction Result</h1>
+        
+        {% if result == 'Approved' %}
+        <div class="result approved">
+            <i class="fas fa-check-circle result-icon"></i>
+            <h2>Approved</h2>
+            <p class="message">Congratulations! Your loan application has been approved.</p>
+        </div>
+        {% else %}
+        <div class="result denied">
+            <i class="fas fa-times-circle result-icon"></i>
+            <h2>Denied</h2>
+            <p class="message">We're sorry, but your loan application has been denied.</p>
+        </div>
+        {% endif %}
+        
+        <div class="details">
+            <h3>Application Details</h3>
+            <div class="detail-grid">
+                {% for key, value in form_data.items %}
+                <div class="detail-item">
+                    <strong>
+                        {% if key == 'Gender' %}Gender
+                        {% elif key == 'Married' %}Marital Status
+                        {% elif key == 'Dependents' %}Number of Dependents
+                        {% elif key == 'Education' %}Education Level
+                        {% elif key == 'Self_Employed' %}Self-Employed
+                        {% elif key == 'ApplicantIncome' %}Applicant Income
+                        {% elif key == 'CoapplicantIncome' %}Co-applicant Income
+                        {% elif key == 'LoanAmount' %}Loan Amount
+                        {% elif key == 'Loan_Amount_Term' %}Loan Term
+                        {% elif key == 'Credit_History' %}Credit History
+                        {% elif key == 'Property_Area' %}Property Area
+                        {% else %}{{ key|title }}
+                        {% endif %}
+                    </strong>
+                    <span>{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <center>
+            <a href="{% url 'predict' %}" class="btn">Make Another Prediction</a>
+        </center>
+    </div>
+</body>
+</html>
