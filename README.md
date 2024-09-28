@@ -25,7 +25,7 @@ Here's a sneak peek of our user-friendly interface:
 *Our intuitive loan application form where users input their details.*
 
 ### Prediction Result
-![Prediction Result](https://github.com/user-attachments/assets/d510048a-8023-47f9-900e-700cd12580af)
+![Prediction Result](https://github.com/user-attachments/assets/32cc6d94-656e-40f1-9d99-8b5b1c636d07)
 *An example of the prediction result page showing loan approval likelihood.*
 
 ## ✨ Features
